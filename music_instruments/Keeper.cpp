@@ -4,78 +4,69 @@
 
 #include "Keeper.h"
 
-void Keeper::add_new_item() {
-    int answer;
-    while (true) {
-        system("cls");
-        std::cout << "Введите тип каких инструментов хотите добавить в программу:\n"
-                  << "1 - Ударные\n2 - Струнные\n3 - Звуковые\n";
-        answer = input<int>();
-        if (answer > 3 || answer < 1) {
-            std::cout << "Ошибка в введенных данных!\n";
-        } else break;
+void Keeper::delete_item() {
+    if (counter_of_items == 0) {
+        throw std::underflow_error("Нельзя удалить элемент из массива, он пуст!\n");
+    }
+    delete array_of_music_instruments[counter_of_items];
+    counter_of_items--;
+}
+
+void Keeper::add_new_item(orchestra *new_item) {
+    if (capacity == counter_of_items) {
+        resize_of_array();
+    }
+    array_of_music_instruments[counter_of_items] = new_item;
+    counter_of_items++;
+    std::cout << "Элемент успешно добавлен в массив!\n";
+}
+
+Keeper::Keeper() {
+    capacity = 10;
+    array_of_music_instruments = new orchestra *[capacity];
+}
+
+Keeper::Keeper(int initial_capacity) {
+    capacity = initial_capacity;
+    array_of_music_instruments = new orchestra * [capacity];
+}
+
+void Keeper::resize_of_array() {
+    int new_size = capacity + 10;
+    auto bigger_array = new orchestra *[new_size];
+
+    for (int i = 0; i < capacity; i++) {
+        bigger_array[i] = array_of_music_instruments[i];
     }
 
-    static int cnt = 0;
-    switch (answer) {
-        case 1: {
-            std::cout << "Вы выбрали добавление ударных инструментов в оркестр.\n";
-            mass_of_percussion_instruments[cnt++] = new percussion_instrument;
-            break;
-        }
-        case 2: {
-            std::cout << "Вы выбрали добавление струнных инструментов в оркестр.\n";
-            mass_of_string_instrument[cnt++] = new string_instrument;
-            break;
-        }case 3: {
-            std::cout << "Вы выбрали добавление духовых инструментов в оркестр.\n";
-            mass_of_wind_instruments[cnt++] = new wind_instrument;
-            break;
-        }
+    for (int i = 0; i < capacity; i++) {
+        delete array_of_music_instruments[i];
+    }
+    delete[] array_of_music_instruments;
+    capacity = new_size;
+    array_of_music_instruments = bigger_array;
+}
+
+void Keeper::read_from_file() {
+    file.open("output.txt", std::ios::in);
+    if (!file.is_open()) {
+        std::cout << "Incorrect file opening\n";
+        exit(1);
+    }
+
+    for (int i = 0; i < counter_of_items; i++) {
+        array_of_music_instruments[i]->read_from_file(file);
     }
 }
 
-void Keeper::set_capacity_of_every_type() {
-    while (true) {
-        system("pause");
-        system("cls");
-        std::cout << "Количество ударных\n";
-        capacity_of_percussion_instruments = input<int>();
-        if (capacity_of_percussion_instruments > 0) {
-            mass_of_percussion_instruments = new percussion_instrument *[capacity_of_percussion_instruments];
-            break;
-        }
-        else {
-            std::cout << "Повторите попытку ввода!\n";
-        }
+void Keeper::write_in_file() {
+    file.open("input.txt", std::ios::out);
+    if (!file.is_open()) {
+        std::cout << "Incorrect file opening\n";
+        exit(1);
     }
 
-    while (true) {
-        system("pause");
-        system("cls");
-        std::cout << "Количество струнных\n";
-        capacity_of_string_instruments = input<int>();
-        if (capacity_of_string_instruments > 0) {
-            mass_of_string_instrument = new string_instrument *[capacity_of_string_instruments];
-            break;
-        }
-        else {
-            std::cout << "Повторите попытку ввода!\n";
-        }
+    for (int i = 0; i < counter_of_items; i++) {
+        array_of_music_instruments[i]->write_to_file(file);
     }
-
-    while (true) {
-        system("pause");
-        system("cls");
-        std::cout << "Количество духовых\n";
-        capacity_of_wind_instruments = input<int>();
-        if (capacity_of_wind_instruments > 0) {
-            mass_of_wind_instruments = new wind_instrument *[capacity_of_wind_instruments];
-            break;
-        }
-        else {
-            std::cout << "Повторите попытку ввода!\n";
-        }
-    }
-    system("pause");
 }

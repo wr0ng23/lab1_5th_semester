@@ -4,7 +4,7 @@
 #ifndef TECH_PROG_LABS2_ORCHESTRA_H
 #define TECH_PROG_LABS2_ORCHESTRA_H
 #include <iostream>
-
+#include <fstream>
 
 class orchestra {
 protected:
@@ -41,7 +41,9 @@ public:
 
     virtual void display_data();
 
-    //virtual set_data();
+    virtual void read_from_file(std::fstream& file);
+
+    virtual void write_to_file(std::fstream& file);
 };
 
 

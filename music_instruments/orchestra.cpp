@@ -75,5 +75,14 @@ orchestra &orchestra::operator=(const orchestra &orchestra2) {
 
 void orchestra::display_data() {
     std::cout << "name_of_instrument_: " << name_of_instrument_ << "\nname_of_owner_: " << name_of_owner_
-       << "\nprice_: " << price_ << "\ncount_of_instruments_: " << count_of_instruments_ << '\n';
+              << "\nprice_: " << price_ << "\ncount_of_instruments_: " << count_of_instruments_ << '\n';
+}
+
+void orchestra::read_from_file(std::fstream &file) {
+    file >> name_of_instrument_ >> name_of_owner_ >> price_ >> count_of_instruments_;
+}
+
+void orchestra::write_to_file(std::fstream &file) {
+    file << name_of_instrument_ << '\n' << name_of_owner_ << '\n'
+         << price_ << '\n' <<  count_of_instruments_ << '\n';
 }

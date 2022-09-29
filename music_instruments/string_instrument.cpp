@@ -58,3 +58,13 @@ void string_instrument::display_data() {
     orchestra::display_data();
     std::cout << "manufacturers_name_: " << manufacturers_name_ << "\ndescription_: " << description_ << '\n';
 }
+
+void string_instrument::read_from_file(std::fstream& file) {
+    orchestra::read_from_file(file);
+    file >> manufacturers_name_ >> description_;
+}
+
+void string_instrument::write_to_file(std::fstream& file) {
+    orchestra::write_to_file(file);
+    file << manufacturers_name_ << '\n' << description_;
+}

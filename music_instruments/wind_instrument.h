@@ -33,6 +33,10 @@ public:
     void set_defects(std::string defects);
 
     void display_data();
+
+    void read_from_file(std::fstream& file) override;
+
+    void write_to_file(std::fstream& file) override;
 };
 
 

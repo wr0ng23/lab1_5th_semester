@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.23)
+project(tech_prog_labs2)
+
+set(CMAKE_CXX_STANDARD 20)
+
+add_executable(tech_prog_labs2 main.cpp music_instruments/orchestra.cpp music_instruments/orchestra.h music_instruments/percussion_instrument.cpp music_instruments/percussion_instrument.h music_instruments/string_instrument.cpp music_instruments/string_instrument.h music_instruments/wind_instrument.cpp music_instruments/wind_instrument.h music_instruments/Keeper.cpp music_instruments/Keeper.h music_instruments/safe_input.h music_instruments/bad_extraction.cpp music_instruments/bad_extraction.h)

@@ -46,3 +46,13 @@ void percussion_instrument::display_data() {
     orchestra::display_data();
     std::cout << "type_: " << type_ << '\n';
 }
+
+void percussion_instrument::read_from_file(std::fstream& file) {
+    orchestra::read_from_file(file);
+    file >> type_;
+}
+
+void percussion_instrument::write_to_file(std::fstream& file) {
+    orchestra::write_to_file(file);
+    file << type_;
+}

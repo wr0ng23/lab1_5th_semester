@@ -5,21 +5,24 @@
 #ifndef TECH_PROG_LABS2_KEEPER_H
 #define TECH_PROG_LABS2_KEEPER_H
 #include "safe_input.h"
-#include "percussion_instrument.h"
-#include "string_instrument.h"
-#include "wind_instrument.h"
+#include <fstream>
+#include "orchestra.h"
+#include "bad_extraction.h"
 
 class Keeper {
 private:
-    int capacity_of_percussion_instruments;
-    int capacity_of_string_instruments;
-    int capacity_of_wind_instruments;
-    percussion_instrument** mass_of_percussion_instruments;
-    string_instrument** mass_of_string_instrument;
-    wind_instrument** mass_of_wind_instruments;
+    orchestra** array_of_music_instruments;
+    std::fstream file;
+    void resize_of_array();
+    int capacity;
+    int counter_of_items = 0;
 public:
-    void add_new_item();
-    void set_capacity_of_every_type();
+    Keeper();
+    Keeper(int initial_capacity);
+    void add_new_item(orchestra* new_item);
+    void delete_item();
+    void write_in_file();
+    void read_from_file();
 };
 
 
