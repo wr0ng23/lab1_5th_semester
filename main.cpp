@@ -1,5 +1,4 @@
 #include <Windows.h>
-#include "music_instruments/string_instrument.h"
 #include "music_instruments/Keeper.h"
 
 /*Класс Оркестр хранит данные об инструментах: ударные, струнные, духовые.
@@ -19,7 +18,7 @@
 int main() {
     SetConsoleOutputCP(CP_UTF8);
     Keeper keeper;
-    keeper.set_capacity_of_every_type();
+    keeper.read_from_file();
 
     return 0;
 }

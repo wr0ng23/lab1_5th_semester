@@ -32,7 +32,7 @@ void percussion_instrument::set_type(const std::string type) {
 }
 
 percussion_instrument::~percussion_instrument() {
-    std::cout << "Вызван деструктор базового класса!\n";
+    std::cout << "Вызван деструктор для класса ударных!\n";
 }
 
 percussion_instrument &percussion_instrument::operator=(const percussion_instrument &percussion_instrument2) {
@@ -55,4 +55,8 @@ void percussion_instrument::read_from_file(std::fstream& file) {
 void percussion_instrument::write_to_file(std::fstream& file) {
     orchestra::write_to_file(file);
     file << type_;
+}
+
+void percussion_instrument::write_class_name_to_file(std::fstream &file) {
+    file << '\n' << 1 << '\n';
 }

@@ -3,6 +3,7 @@
 //
 #ifndef TECH_PROG_LABS2_ORCHESTRA_H
 #define TECH_PROG_LABS2_ORCHESTRA_H
+
 #include <iostream>
 #include <fstream>
 
@@ -12,6 +13,16 @@ protected:
     std::string name_of_owner_;
     double price_;
     int count_of_instruments_;
+
+    //Writting class name in file (1 - percussion_instrument, 2 - string_instrumnet, 3 - wind_instrument)
+    virtual void write_class_name_to_file(std::fstream &file) = 0;
+
+    virtual void read_from_file(std::fstream &file);
+
+    virtual void write_to_file(std::fstream &file);
+
+    friend class Keeper;
+
 public:
     orchestra();
 
@@ -19,7 +30,7 @@ public:
 
     orchestra(std::string name_of_instrument, double price, std::string name_of_owner, int count_of_instruments);
 
-    orchestra(const orchestra& o2);
+    orchestra(const orchestra &o2);
 
     std::string get_name_of_instrument() const;
 
@@ -37,13 +48,9 @@ public:
 
     void set_count(int count);
 
-    orchestra& operator=(const orchestra &orchestra2);
+    orchestra &operator=(const orchestra &orchestra2);
 
     virtual void display_data();
-
-    virtual void read_from_file(std::fstream& file);
-
-    virtual void write_to_file(std::fstream& file);
 };
 
 

@@ -83,6 +83,7 @@ void orchestra::read_from_file(std::fstream &file) {
 }
 
 void orchestra::write_to_file(std::fstream &file) {
+    write_class_name_to_file(file);
     file << name_of_instrument_ << '\n' << name_of_owner_ << '\n'
          << price_ << '\n' <<  count_of_instruments_ << '\n';
 }

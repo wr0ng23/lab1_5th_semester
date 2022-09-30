@@ -65,3 +65,7 @@ void wind_instrument::write_to_file(std::fstream& file) {
     orchestra::write_to_file(file);
     file << manufacturers_name_ << '\n' << defects_;
 }
+
+void wind_instrument::write_class_name_to_file(std::fstream &file) {
+    file << '\n' << 3 << '\n';
+}

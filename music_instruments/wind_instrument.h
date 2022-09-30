@@ -37,6 +37,8 @@ public:
     void read_from_file(std::fstream& file) override;
 
     void write_to_file(std::fstream& file) override;
+
+    void write_class_name_to_file(std::fstream &file) override;
 };
 
 
