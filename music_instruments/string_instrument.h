@@ -12,6 +12,13 @@ class string_instrument : public orchestra {
 private:
     std::string manufacturers_name_;
     std::string description_;
+
+    [[nodiscard]] int choice_of_field() const override;
+
+    void display_class_name() const override;
+
+    void write_class_name_to_file(std::fstream &file) const override;
+
 public:
     string_instrument();
 
@@ -22,23 +29,25 @@ public:
 
     ~string_instrument() override;
 
-    string_instrument& operator=(const string_instrument &string_instrument2);
+    string_instrument &operator=(const string_instrument &string_instrument2);
 
-    std::string get_manufacturers_name() const;
+    [[nodiscard]] std::string get_manufacturers_name() const;
 
     void set_manufacturers_name(std::string manufacturers_name);
 
-    std::string get_description() const;
+    [[nodiscard]] std::string get_description() const;
 
     void set_description(std::string description);
 
-    void display_data();
+    void display_data() const override;
 
-    void read_from_file(std::fstream& file) override;
+    void read_from_file(std::fstream &file) override;
 
-    void write_to_file(std::fstream& file) override;
+    void write_to_file(std::fstream &file) const override;
 
-    void write_class_name_to_file(std::fstream &file) override;
+    [[nodiscard]] string_instrument *clone() const override;
+
+    void edit_data() override;
 };
 
 

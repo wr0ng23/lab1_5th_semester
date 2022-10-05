@@ -42,21 +42,44 @@ percussion_instrument &percussion_instrument::operator=(const percussion_instrum
     return *this;
 }
 
-void percussion_instrument::display_data() {
+void percussion_instrument::display_data() const {
     orchestra::display_data();
-    std::cout << "type_: " << type_ << '\n';
+    std::cout << "5) type_: " << type_ << "\n\n";
 }
 
-void percussion_instrument::read_from_file(std::fstream& file) {
+void percussion_instrument::read_from_file(std::fstream &file) {
     orchestra::read_from_file(file);
-    file >> type_;
+    type_ = safe_input_from_file<std::string>(file);
+    //std::getline(file, type_);
 }
 
-void percussion_instrument::write_to_file(std::fstream& file) {
+void percussion_instrument::write_to_file(std::fstream &file) const {
     orchestra::write_to_file(file);
-    file << type_;
+    file << type_ << '\n';
 }
 
-void percussion_instrument::write_class_name_to_file(std::fstream &file) {
-    file << '\n' << 1 << '\n';
+void percussion_instrument::write_class_name_to_file(std::fstream &file) const {
+    file << 1 << '\n';
+}
+
+percussion_instrument *percussion_instrument::clone() const {
+    return new percussion_instrument(*this);
+}
+
+void percussion_instrument::edit_data() {
+    int answer = setting_values_for_fields();
+    if (answer == 5) {
+        std::cout << "Новое значение поля type_\n";
+        type_ = input<std::string>();
+    }
+    std::cout << "Значение успешно установлено!\n";
+}
+
+void percussion_instrument::display_class_name() const {
+    std::cout << "Class: percussion instrument\n";
+}
+
+int percussion_instrument::choice_of_field() const {
+    // кол-во полей 5
+    return checking_accuracy_of_the_input(1, 5);
 }

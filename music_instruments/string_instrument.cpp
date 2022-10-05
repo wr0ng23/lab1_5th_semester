@@ -54,21 +54,49 @@ string_instrument &string_instrument::operator=(const string_instrument &string_
     return *this;
 }
 
-void string_instrument::display_data() {
+void string_instrument::display_data() const {
     orchestra::display_data();
-    std::cout << "manufacturers_name_: " << manufacturers_name_ << "\ndescription_: " << description_ << '\n';
+    std::cout << "5) manufacturers_name_: " << manufacturers_name_ << "\n6) description_: " << description_ << "\n\n";
 }
 
-void string_instrument::read_from_file(std::fstream& file) {
+void string_instrument::read_from_file(std::fstream &file) {
     orchestra::read_from_file(file);
-    file >> manufacturers_name_ >> description_;
+    manufacturers_name_ = safe_input_from_file<std::string>(file);
+    description_ = safe_input_from_file<std::string>(file);
+    //std::getline(file, manufacturers_name_);
+    //std::getline(file, description_);
 }
 
-void string_instrument::write_to_file(std::fstream& file) {
+void string_instrument::write_to_file(std::fstream &file) const {
     orchestra::write_to_file(file);
-    file << manufacturers_name_ << '\n' << description_;
+    file << manufacturers_name_ << '\n' << description_ << '\n';
 }
 
-void string_instrument::write_class_name_to_file(std::fstream &file) {
-    file << '\n' << 2 << '\n';
+void string_instrument::write_class_name_to_file(std::fstream &file) const {
+    file << 2 << '\n';
+}
+
+string_instrument *string_instrument::clone() const {
+    return new string_instrument(*this);
+}
+
+void string_instrument::edit_data() {
+    int answer = setting_values_for_fields();
+    if (answer == 5) {
+        std::cout << "Новое значение поля manufacturers_name_\n";
+        manufacturers_name_ = input<std::string>();
+    } else if (answer == 6) {
+        std::cout << "Новое значение поля description_\n";
+        description_ = input<std::string>();
+    }
+    std::cout << "Значение успешно установлено!\n";
+}
+
+void string_instrument::display_class_name() const {
+    std::cout << "Class: string instrument\n";
+}
+
+int string_instrument::choice_of_field() const {
+    // кол-во полей 6
+    return checking_accuracy_of_the_input(1, 6);
 }

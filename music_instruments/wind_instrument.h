@@ -4,7 +4,6 @@
 #ifndef TECH_PROG_LABS2_WIND_INSTRUMENT_H
 #define TECH_PROG_LABS2_WIND_INSTRUMENT_H
 
-#include <ostream>
 #include "orchestra.h"
 
 
@@ -12,6 +11,13 @@ class wind_instrument : public orchestra {
 private:
     std::string manufacturers_name_;
     std::string defects_;
+
+    [[nodiscard]] int choice_of_field() const override;
+
+    void display_class_name() const override;
+
+    void write_class_name_to_file(std::fstream &file) const override;
+
 public:
     wind_instrument();
 
@@ -24,21 +30,23 @@ public:
 
     wind_instrument &operator=(const wind_instrument &wind_instrument2);
 
-    std::string get_manufacturers_name() const;
+    [[nodiscard]] std::string get_manufacturers_name() const;
 
     void set_manufacturers_name(std::string manufacturers_name);
 
-    std::string get_defects() const;
+    [[nodiscard]] std::string get_defects() const;
 
     void set_defects(std::string defects);
 
-    void display_data();
+    void display_data() const override;
 
-    void read_from_file(std::fstream& file) override;
+    void read_from_file(std::fstream &file) override;
 
-    void write_to_file(std::fstream& file) override;
+    void write_to_file(std::fstream &file) const override;
 
-    void write_class_name_to_file(std::fstream &file) override;
+    [[nodiscard]] wind_instrument *clone() const override;
+
+    void edit_data() override;
 };
 
 
