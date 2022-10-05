@@ -14,9 +14,8 @@
 
 int main() {
     SetConsoleOutputCP(CP_UTF8);
-    std::cout << "\a\a\a\a\a\a\a\a\a\a\a\a\a\a";
-    //menu menu;
-    //menu.start_program();
+    menu menu;
+    menu.start_program();
 
     return 0;
 }
